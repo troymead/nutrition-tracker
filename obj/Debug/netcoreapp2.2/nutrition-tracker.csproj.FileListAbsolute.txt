@@ -1,0 +1,11 @@
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.csprojAssemblyReference.cache
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.csproj.CoreCompileInputs.cache
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.AssemblyInfoInputs.cache
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.AssemblyInfo.cs
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/bin/Debug/netcoreapp2.2/nutrition-tracker.deps.json
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/bin/Debug/netcoreapp2.2/nutrition-tracker.runtimeconfig.json
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/bin/Debug/netcoreapp2.2/nutrition-tracker.runtimeconfig.dev.json
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/bin/Debug/netcoreapp2.2/nutrition-tracker.dll
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/bin/Debug/netcoreapp2.2/nutrition-tracker.pdb
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.dll
+/Users/troyspringmeadows/Documents/Projects/nutrition-tracker/obj/Debug/netcoreapp2.2/nutrition-tracker.pdb
