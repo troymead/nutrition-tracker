@@ -6,7 +6,9 @@ namespace nutrition_tracker
     {
         static void Main(string[] args)
         {
+            // user with random number of calories consumed each day
             UserData user1 = new UserData("troymeadows", 20, "female", 125, 65, 2, 3);
+            UserData user2 = new UserData("josh", 21, "male", 180, 72, 1, 2);
             int calorieMin = 500;
             int calorieMax = 5000;
             Random randNum = new Random();
@@ -51,7 +53,7 @@ namespace nutrition_tracker
                     break;
             }
 
-            // calorie calc to lose weight
+            // calorie calc to lose, maintain, or gain weight
             switch(user.weightStatus) {
                 case 1:
                     recCalories = recCalories - 500; // eat 500 less calories per day to lose a pound in a week
