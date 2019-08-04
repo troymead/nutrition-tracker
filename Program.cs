@@ -2,6 +2,10 @@
 
 namespace nutrition_tracker
 {
+    static class Constants {
+        public const int numDays = 7;
+        public const int numWeeks = 4;
+    }
     class Program
     {
         static void Main(string[] args)
@@ -13,13 +17,18 @@ namespace nutrition_tracker
             int calorieMax = 5000;
             Random randNum = new Random();
 
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 7; j++) {
+            for (int i = 0; i < Constants.numWeeks; i++) {
+                for (int j = 0; j < Constants.numDays; j++) {
                     user1.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
                 }
             }
 
             printUserInfo(user1); // need to test
+            Console.WriteLine("User 1's Min and Max Calories for 1 Month:");
+            double[] minMax = new double[2];
+            minMax = userMinMaxCalories(user1);
+            Console.WriteLine("Minimum: {0}", minMax[0]); // testing min max method
+            Console.WriteLine("Maximum: {0}", minMax[1]);
         }
 
         static public double userCalorieGoal(UserData user) {
@@ -95,6 +104,43 @@ namespace nutrition_tracker
             
             Console.WriteLine("The user should consume {0} calories each day to work towards their goal.", userCalorieGoal(user));
             Console.WriteLine();
+        }
+
+        static public double[] userMinMaxCalories(UserData user) { // need to test
+            double minCal;
+            double maxCal;
+            minCal = user.userCalories[0,0];
+            maxCal = user.userCalories[0,0];
+            for (int i = 1; i < Constants.numWeeks; i++) {
+                for (int j = 1; j < Constants.numDays; j++) {
+                    if (minCal > user.userCalories[i,j]) {
+                        minCal = user.userCalories[i,j];
+                    }
+                    if (maxCal < user.userCalories[i,j]) {
+                        maxCal = user.userCalories[i,j];
+                    }
+                }
+            }
+            double[] minMax = new double[2];
+            minMax[0] = minCal;
+            minMax[1] = maxCal;
+            return minMax;
+        }
+
+        static public double userAvgCaloriesMonth(UserData user) {
+            double sum = 0;
+            for (int i = 0; i < Constants.numWeeks; i++) {
+                for (int j = 0; j < Constants.numDays; j++) {
+                    sum = sum + user.userCalories[i,j];
+                }
+            }
+            double avgCalMonth = sum / (Constants.numWeeks * Constants.numDays);
+            return avgCalMonth;
+        }
+
+        static public double[] userAvgCaloriesWeek(UserData user) {
+            double[] sum = new double[4];
+            return sum;
         }
     }
 }
