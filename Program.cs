@@ -13,6 +13,7 @@ namespace nutrition_tracker
             // user with random number of calories consumed each day
             UserData user1 = new UserData("troymeadows", 20, "female", 125, 65, 2, 3);
             UserData user2 = new UserData("josh", 21, "male", 180, 72, 1, 2);
+            UserData user3 = new UserData("steven", 18, "male", 140, 62, 3, 4); // need to test new users
             int calorieMin = 500;
             int calorieMax = 5000;
             Random randNum = new Random();
@@ -23,12 +24,8 @@ namespace nutrition_tracker
                 }
             }
 
-            printUserInfo(user1); // need to test
-            Console.WriteLine("User 1's Min and Max Calories for 1 Month:");
-            double[] minMax = new double[2];
-            minMax = userMinMaxCalories(user1);
-            Console.WriteLine("Minimum: {0}", minMax[0]); // testing min max method
-            Console.WriteLine("Maximum: {0}", minMax[1]);
+            printUserInfo(user1);
+            printUserSummary(user1);
         }
 
         static public double userCalorieGoal(UserData user) {
@@ -106,6 +103,23 @@ namespace nutrition_tracker
             Console.WriteLine();
         }
 
+        static public void printUserSummary(UserData user) {
+            // method will print user's min and max calorie intake and which day
+            // also prints average calories per week and for a month
+            Console.WriteLine();
+            Console.WriteLine("----- USER SUMMARY -----");
+            Console.WriteLine("User Minimum Calories for the month: {0} calories", userMinMaxCalories(user)[0]);
+            Console.WriteLine("User Maximum Calories for the month: {0} calories", userMinMaxCalories(user)[1]);
+            Console.WriteLine("Average Calorie Consumption for Each Week:");
+            double[] weeklyAvg = new double[4];
+            weeklyAvg = userAvgCaloriesWeek(user);
+            for (int i = 0; i < 4; i++) {
+                Console.WriteLine("Average for Week {0}: {1} calories", (i+1), weeklyAvg[i]);
+            }
+            Console.WriteLine("Average Calorie Consumption for the month: {0} calories", userAvgCaloriesMonth(user));
+            Console.WriteLine("Number of times the Goal Was Met: {0}", goalMet(user));
+        }
+
         static public double[] userMinMaxCalories(UserData user) { // need to test
             double minCal;
             double maxCal;
@@ -140,7 +154,27 @@ namespace nutrition_tracker
 
         static public double[] userAvgCaloriesWeek(UserData user) {
             double[] sum = new double[4];
-            return sum;
+            double[] avg = new double[4];
+            for(int i = 0; i < Constants.numWeeks; i++) {
+                for (int j = 0; j < Constants.numDays; j++) {
+                    sum[i] = sum[i] + user.userCalories[i,j];
+                }
+                avg[i] = sum[i] / 7;
+            }
+            return avg;
+        }
+
+        static public int goalMet(UserData user) {
+            double goal = userCalorieGoal(user);
+            int counter = 0;
+            for (int i = 0; i < Constants.numWeeks; i++) {
+                for (int j = 0; j < Constants.numDays; j++) {
+                    if (user.userCalories[i,j] <= goal) {
+                        counter  = counter + 1;
+                    }
+                }
+            }
+            return counter;
         }
     }
 }

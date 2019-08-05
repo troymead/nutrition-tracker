@@ -36,11 +36,3 @@ public struct UserData {
         
     }
 }
-// class NutritionTracker {
-//     static void Main(string[] args) {
-//         user2 = new UserData("troymeadows", 20, 125, 1.65);
-//         int minCalories = 500;
-//         int maxCalories = 0; // placeholder; need to calculate for later
-
-//     }
-// }
