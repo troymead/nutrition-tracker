@@ -21,11 +21,19 @@ namespace nutrition_tracker
             for (int i = 0; i < Constants.numWeeks; i++) {
                 for (int j = 0; j < Constants.numDays; j++) {
                     user1.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
+                    user2.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
+                    user3.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
                 }
             }
 
             printUserInfo(user1);
             printUserSummary(user1);
+
+            printUserInfo(user2);
+            printUserSummary(user2);
+
+            printUserInfo(user3);
+            printUserSummary(user3);
         }
 
         static public double userCalorieGoal(UserData user) {
@@ -111,13 +119,26 @@ namespace nutrition_tracker
             Console.WriteLine("User Minimum Calories for the month: {0} calories", userMinMaxCalories(user)[0]);
             Console.WriteLine("User Maximum Calories for the month: {0} calories", userMinMaxCalories(user)[1]);
             Console.WriteLine("Average Calorie Consumption for Each Week:");
+
             double[] weeklyAvg = new double[4];
             weeklyAvg = userAvgCaloriesWeek(user);
+
             for (int i = 0; i < 4; i++) {
                 Console.WriteLine("Average for Week {0}: {1} calories", (i+1), weeklyAvg[i]);
             }
+
             Console.WriteLine("Average Calorie Consumption for the month: {0} calories", userAvgCaloriesMonth(user));
             Console.WriteLine("Number of times the Goal Was Met: {0}", goalMet(user));
+
+            if (goalMet(user) < 14) {
+                Console.WriteLine("You can do better than that! Push yourself harder next month!");
+            }
+            else if (goalMet(user) < 20) {
+                Console.WriteLine("You're on the right track. Keep working towards a perfect month!");
+            }
+            else {
+                Console.WriteLine("Excellent Work! Keep this momentum going into the next month!");
+            }
         }
 
         static public double[] userMinMaxCalories(UserData user) { // need to test
