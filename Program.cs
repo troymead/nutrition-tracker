@@ -1,7 +1,9 @@
 ﻿using System;
+// TODO: Add comments for method descriptions
 
 namespace nutrition_tracker
 {
+    // class that simply holds constants that are used frequently in program
     static class Constants {
         public const int numDays = 7;
         public const int numWeeks = 4;
@@ -11,35 +13,44 @@ namespace nutrition_tracker
         static void Main(string[] args)
         {
             // user with random number of calories consumed each day
-            UserData user1 = new UserData("troymeadows", 20, "female", 125, 65, 2, 3);
-            UserData user2 = new UserData("josh", 21, "male", 180, 72, 1, 2);
-            UserData user3 = new UserData("steven", 18, "male", 140, 62, 3, 4); // need to test new users
-            int calorieMin = 500;
-            int calorieMax = 5000;
+            UserData user1 = new UserData("John Doe", 20, "male", 160, 72, 2, 3);
+            UserData user2 = new UserData("Jamie Jam", 45, "female", 140, 65, 1, 2);
+            UserData user3 = new UserData("Jordan Michael", 18, "male", 200, 62, 3, 4); // need to test new users
             Random randNum = new Random();
 
+            // fills 2-d array simulating a month with random amounts of calories
             for (int i = 0; i < Constants.numWeeks; i++) {
                 for (int j = 0; j < Constants.numDays; j++) {
-                    user1.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
-                    user2.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
-                    user3.userCalories[i,j] = randNum.Next(calorieMin, calorieMax);
+                    user1.userCalories[i,j] = randNum.Next((Convert.ToInt32(userCalorieGoal(user1))-1000), (Convert.ToInt32(userCalorieGoal(user1)+1000)));
+                    user2.userCalories[i,j] = randNum.Next((Convert.ToInt32(userCalorieGoal(user2))-1000), (Convert.ToInt32(userCalorieGoal(user2)+1000)));
+                    user3.userCalories[i,j] = randNum.Next((Convert.ToInt32(userCalorieGoal(user3))-1000), (Convert.ToInt32(userCalorieGoal(user3)+1000)));
                 }
             }
 
             printUserInfo(user1);
+            Console.WriteLine();
             printUserSummary(user1);
-
+            Console.WriteLine();
+            
+            Console.WriteLine();
             printUserInfo(user2);
+            Console.WriteLine();
             printUserSummary(user2);
+            Console.WriteLine();
 
+            Console.WriteLine();
             printUserInfo(user3);
+            Console.WriteLine();
             printUserSummary(user3);
+            Console.WriteLine();
         }
 
+        // method to calculate user goal based on user information
         static public double userCalorieGoal(UserData user) {
             double recCalories;
             recCalories = 0;
 
+            // difference in gender means difference in calorie intak
             if (user.userGender == "male") {
                 recCalories = 66 + (6.3 * user.userWeight) + (12.9 * user.userHeight) - (6.8 * user.userAge);
             }
@@ -47,6 +58,7 @@ namespace nutrition_tracker
                 recCalories = 655 + (4.3 * user.userWeight) + (4.7 * user.userHeight) - (4.7 * user.userAge);
             }
 
+            // switch statement to update calculation based on user activity level
             switch (user.activity) {
                 case 1:
                     recCalories = recCalories * 1.2;
@@ -67,7 +79,7 @@ namespace nutrition_tracker
                     break;
             }
 
-            // calorie calc to lose, maintain, or gain weight
+            // switch statement for calorie calculation to lose, maintain, or gain weight
             switch(user.weightStatus) {
                 case 1:
                     recCalories = recCalories - 500; // eat 500 less calories per day to lose a pound in a week
@@ -83,6 +95,7 @@ namespace nutrition_tracker
             return recCalories;
         }
 
+        // method that prints user's information
         static public void printUserInfo(UserData user) {
             Console.WriteLine();
             Console.WriteLine("----- USER INFORMATION -----");
@@ -114,7 +127,6 @@ namespace nutrition_tracker
         static public void printUserSummary(UserData user) {
             // method will print user's min and max calorie intake and which day
             // also prints average calories per week and for a month
-            Console.WriteLine();
             Console.WriteLine("----- USER SUMMARY -----");
             Console.WriteLine("User Minimum Calories for the month: {0} calories", userMinMaxCalories(user)[0]);
             Console.WriteLine("User Maximum Calories for the month: {0} calories", userMinMaxCalories(user)[1]);
@@ -141,6 +153,7 @@ namespace nutrition_tracker
             }
         }
 
+        // method to determine minimum and maximum calorie consumption; returns an array
         static public double[] userMinMaxCalories(UserData user) { // need to test
             double minCal;
             double maxCal;
@@ -162,6 +175,7 @@ namespace nutrition_tracker
             return minMax;
         }
 
+        // calculates the average amount of calories in a month
         static public double userAvgCaloriesMonth(UserData user) {
             double sum = 0;
             for (int i = 0; i < Constants.numWeeks; i++) {
@@ -173,6 +187,7 @@ namespace nutrition_tracker
             return avgCalMonth;
         }
 
+        // calculates the average amount of calories for each week
         static public double[] userAvgCaloriesWeek(UserData user) {
             double[] sum = new double[4];
             double[] avg = new double[4];
@@ -185,6 +200,7 @@ namespace nutrition_tracker
             return avg;
         }
 
+        // method that tracks the number of times a user's calorie goal was made in a month
         static public int goalMet(UserData user) {
             double goal = userCalorieGoal(user);
             int counter = 0;
