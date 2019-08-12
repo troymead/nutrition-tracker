@@ -47,8 +47,7 @@ namespace nutrition_tracker
 
         // method to calculate user goal based on user information
         static public double userCalorieGoal(UserData user) {
-            double recCalories;
-            recCalories = 0;
+            double recCalories = 0;
 
             // difference in gender means difference in calorie intak
             if (user.userGender == "male") {
